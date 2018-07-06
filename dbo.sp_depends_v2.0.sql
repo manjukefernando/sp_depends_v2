@@ -6,7 +6,7 @@
 
 CREATE PROCEDURE dbo.sp_depends_v2
 --Parameters
-	@objname			AS NVARCHAR(100) = ''
+	@objname			AS NVARCHAR(100)
 	,@objclass			AS NVARCHAR (60) = 'OBJECT'
 
 AS
@@ -23,7 +23,7 @@ BEGIN
 
 
 	BEGIN TRY
-
+		SET @ProcessTag = CONCAT('Preparing dynamic query to fetch relevant details for object : ',@objname)
 		SET @Sql = '
 		SELECT 
 			CONCAT(sch.[name],''.'',Obj.[name]) AS [name]
